@@ -95,7 +95,7 @@ struct ImageStructGenerator: ExternalOnlyStructGenerator {
       doesThrow: false,
       returnType: Type._UIImage.asOptional(),
       body: "return UIKit.UIImage(resource: \(qualifiedName), compatibleWith: traitCollection)",
-      os: ["iOS", "tvOS"]
+      os: []
     )
   }
 }
@@ -171,7 +171,7 @@ private extension NamespacedAssetSubfolder {
       doesThrow: false,
       returnType: Type._UIImage.asOptional(),
       body: "return UIKit.UIImage(resource: \(qualifiedName), compatibleWith: traitCollection)",
-      os: ["iOS", "tvOS"]
+      os: []
     )
   }
 }

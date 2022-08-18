@@ -57,8 +57,7 @@ struct ColorStructGenerator: ExternalOnlyStructGenerator {
       implements: [],
       typealiasses: [],
       properties: colorLets,
-      functions: groupedColors.uniques.map { [ generateColorFunction(for: $0, at: externalAccessLevel, prefix: qualifiedName),
-                                               generateWatchOSColorFunction(for: $0, at: externalAccessLevel, prefix: qualifiedName)] }.flatMap { $0 },
+      functions: groupedColors.uniques.map { generateColorFunction(for: $0, at: externalAccessLevel, prefix: qualifiedName) },
       structs: structs,
       classes: [],
       os: []
@@ -110,8 +109,7 @@ private extension NamespacedAssetSubfolder {
       implements: [],
       typealiasses: [],
       properties: colorLets,
-      functions: groupedFunctions.uniques.map { [ generateColorFunction(for: $0, at: externalAccessLevel, prefix: qualifiedName),
-                                                  generateWatchOSColorFunction(for: $0, at: externalAccessLevel, prefix: qualifiedName)] }.flatMap { $0 },
+      functions: groupedFunctions.uniques.map { generateColorFunction(for: $0, at: externalAccessLevel, prefix: qualifiedName) },
       structs: structs,
       classes: [],
       os: []
@@ -124,7 +122,7 @@ private func generateColorFunction(for name: String, at externalAccessLevel: Acc
   let qualifiedName = prefix + structName
 
   return Function(
-    availables: ["tvOS 11.0, *", "iOS 11.0, *"],
+    availables: [],
     comments: ["`UIColor(named: \"\(name)\", bundle: ..., traitCollection: ...)`"],
     accessModifier: externalAccessLevel,
     isStatic: true,
@@ -141,7 +139,7 @@ private func generateColorFunction(for name: String, at externalAccessLevel: Acc
     doesThrow: false,
     returnType: Type._UIColor.asOptional(),
     body: "return UIKit.UIColor(resource: \(qualifiedName), compatibleWith: traitCollection)",
-    os: ["iOS", "tvOS"]
+    os: []
   )
 }
 
